@@ -1,0 +1,13 @@
+{
+  "version": 2,
+  "dgSpecHash": "wimE9c/2IRTMBC1M9zOP0G18hrMZJY17x7IVJHYBsWommGs4G034b+vVUQccjQLMuGEe2gUJ65oqpTqYwludyQ==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\ACER\\Documents\\File Kuliah\\Semester 4\\Strategi Algoritma\\Tubes\\BFSDFS\\NasiPadang\\NasiPadang\\NasiPadang.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\ACER\\.nuget\\packages\\automaticgraphlayout\\1.1.11\\automaticgraphlayout.1.1.11.nupkg.sha512",
+    "C:\\Users\\ACER\\.nuget\\packages\\automaticgraphlayout.drawing\\1.1.11\\automaticgraphlayout.drawing.1.1.11.nupkg.sha512",
+    "C:\\Users\\ACER\\.nuget\\packages\\automaticgraphlayout.graphviewergdi\\1.1.11\\automaticgraphlayout.graphviewergdi.1.1.11.nupkg.sha512",
+    "C:\\Users\\ACER\\.nuget\\packages\\automaticgraphlayout.wpfgraphcontrol\\1.1.11\\automaticgraphlayout.wpfgraphcontrol.1.1.11.nupkg.sha512"
+  ],
+  "logs": []
+}
