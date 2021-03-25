@@ -1,5 +1,15 @@
-﻿12
+﻿15
 A B
 A C
-B D
 A D
+B C
+B E
+B F
+C F
+C G
+D G
+D F
+E H
+E F
+F H
+I J

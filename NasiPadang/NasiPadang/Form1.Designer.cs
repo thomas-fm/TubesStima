@@ -43,7 +43,9 @@ namespace NasiPadang
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.panel5 = new System.Windows.Forms.Panel();
+            this.textBox_ExploreFriend = new System.Windows.Forms.TextBox();
             this.panel6 = new System.Windows.Forms.Panel();
+            this.textBox_friendRecommend = new System.Windows.Forms.TextBox();
             this.panel7 = new System.Windows.Forms.Panel();
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
@@ -51,12 +53,18 @@ namespace NasiPadang
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
             this.panel9 = new System.Windows.Forms.Panel();
-            this.radioButton2 = new System.Windows.Forms.RadioButton();
-            this.radioButton1 = new System.Windows.Forms.RadioButton();
+            this.DFS = new System.Windows.Forms.RadioButton();
+            this.BFS = new System.Windows.Forms.RadioButton();
             this.panel10 = new System.Windows.Forms.Panel();
+            this.panel11 = new System.Windows.Forms.Panel();
+            this.panel12 = new System.Windows.Forms.Panel();
+            this.panel13 = new System.Windows.Forms.Panel();
+            this.panel14 = new System.Windows.Forms.Panel();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
             this.panel4.SuspendLayout();
+            this.panel5.SuspendLayout();
+            this.panel6.SuspendLayout();
             this.panel8.SuspendLayout();
             this.panel9.SuspendLayout();
             this.panel10.SuspendLayout();
@@ -91,7 +99,7 @@ namespace NasiPadang
             this.gViewer1.SaveButtonVisible = true;
             this.gViewer1.SaveGraphButtonVisible = true;
             this.gViewer1.SaveInVectorFormatEnabled = true;
-            this.gViewer1.Size = new System.Drawing.Size(554, 551);
+            this.gViewer1.Size = new System.Drawing.Size(554, 568);
             this.gViewer1.TabIndex = 0;
             this.gViewer1.TightOffsetForRouting = 0.125D;
             this.gViewer1.ToolBarIsVisible = true;
@@ -100,7 +108,6 @@ namespace NasiPadang
             this.gViewer1.WindowZoomButtonPressed = false;
             this.gViewer1.ZoomF = 1D;
             this.gViewer1.ZoomWindowThreshold = 0.05D;
-            this.gViewer1.Load += new System.EventHandler(this.gViewer1_Load);
             // 
             // panel1
             // 
@@ -152,7 +159,6 @@ namespace NasiPadang
             this.label1.Size = new System.Drawing.Size(315, 24);
             this.label1.TabIndex = 0;
             this.label1.Text = "FRIEND RECOMMENDATION";
-            this.label1.Click += new System.EventHandler(this.label1_Click_1);
             // 
             // panel4
             // 
@@ -173,10 +179,10 @@ namespace NasiPadang
             this.label2.Size = new System.Drawing.Size(209, 24);
             this.label2.TabIndex = 1;
             this.label2.Text = "EXPLORE FRIENDS";
-            this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
             // comboBox1
             // 
+            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox1.FormattingEnabled = true;
             this.comboBox1.Location = new System.Drawing.Point(562, 344);
             this.comboBox1.Name = "comboBox1";
@@ -186,6 +192,7 @@ namespace NasiPadang
             // 
             // comboBox2
             // 
+            this.comboBox2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox2.FormattingEnabled = true;
             this.comboBox2.Location = new System.Drawing.Point(696, 344);
             this.comboBox2.Name = "comboBox2";
@@ -215,19 +222,45 @@ namespace NasiPadang
             // 
             // panel5
             // 
+            this.panel5.Controls.Add(this.textBox_ExploreFriend);
             this.panel5.Location = new System.Drawing.Point(559, 373);
             this.panel5.Name = "panel5";
             this.panel5.Size = new System.Drawing.Size(247, 256);
             this.panel5.TabIndex = 7;
             this.panel5.Paint += new System.Windows.Forms.PaintEventHandler(this.panel5_Paint);
             // 
+            // textBox_ExploreFriend
+            // 
+            this.textBox_ExploreFriend.BackColor = System.Drawing.Color.White;
+            this.textBox_ExploreFriend.Font = new System.Drawing.Font("Lucida Fax", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.textBox_ExploreFriend.Location = new System.Drawing.Point(0, 0);
+            this.textBox_ExploreFriend.Multiline = true;
+            this.textBox_ExploreFriend.Name = "textBox_ExploreFriend";
+            this.textBox_ExploreFriend.ReadOnly = true;
+            this.textBox_ExploreFriend.Size = new System.Drawing.Size(247, 256);
+            this.textBox_ExploreFriend.TabIndex = 0;
+            // 
             // panel6
             // 
-            this.panel6.Location = new System.Drawing.Point(812, 145);
+            this.panel6.Controls.Add(this.textBox_friendRecommend);
+            this.panel6.Location = new System.Drawing.Point(812, 138);
             this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(318, 484);
+            this.panel6.Size = new System.Drawing.Size(318, 505);
             this.panel6.TabIndex = 8;
             this.panel6.Paint += new System.Windows.Forms.PaintEventHandler(this.panel6_Paint);
+            // 
+            // textBox_friendRecommend
+            // 
+            this.textBox_friendRecommend.AcceptsTab = true;
+            this.textBox_friendRecommend.BackColor = System.Drawing.Color.White;
+            this.textBox_friendRecommend.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.textBox_friendRecommend.Font = new System.Drawing.Font("Lucida Fax", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.textBox_friendRecommend.Location = new System.Drawing.Point(16, 7);
+            this.textBox_friendRecommend.Multiline = true;
+            this.textBox_friendRecommend.Name = "textBox_friendRecommend";
+            this.textBox_friendRecommend.ReadOnly = true;
+            this.textBox_friendRecommend.Size = new System.Drawing.Size(286, 484);
+            this.textBox_friendRecommend.TabIndex = 12;
             // 
             // panel7
             // 
@@ -251,7 +284,7 @@ namespace NasiPadang
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Lucida Fax", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label6.Location = new System.Drawing.Point(0, 19);
+            this.label6.Location = new System.Drawing.Point(2, 19);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(86, 15);
             this.label6.TabIndex = 10;
@@ -259,9 +292,11 @@ namespace NasiPadang
             // 
             // panel8
             // 
+            this.panel8.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel8.Controls.Add(this.textBox1);
             this.panel8.Controls.Add(this.button1);
             this.panel8.Controls.Add(this.label5);
+            this.panel8.ForeColor = System.Drawing.SystemColors.ControlText;
             this.panel8.Location = new System.Drawing.Point(560, 102);
             this.panel8.Name = "panel8";
             this.panel8.Size = new System.Drawing.Size(246, 85);
@@ -288,37 +323,40 @@ namespace NasiPadang
             // 
             // panel9
             // 
-            this.panel9.Controls.Add(this.radioButton2);
-            this.panel9.Controls.Add(this.radioButton1);
+            this.panel9.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel9.Controls.Add(this.DFS);
+            this.panel9.Controls.Add(this.BFS);
             this.panel9.Controls.Add(this.label6);
             this.panel9.Location = new System.Drawing.Point(560, 184);
             this.panel9.Name = "panel9";
             this.panel9.Size = new System.Drawing.Size(246, 63);
             this.panel9.TabIndex = 12;
             // 
-            // radioButton2
+            // DFS
             // 
-            this.radioButton2.AutoSize = true;
-            this.radioButton2.Font = new System.Drawing.Font("Lucida Fax", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.radioButton2.Location = new System.Drawing.Point(169, 17);
-            this.radioButton2.Name = "radioButton2";
-            this.radioButton2.Size = new System.Drawing.Size(48, 19);
-            this.radioButton2.TabIndex = 12;
-            this.radioButton2.TabStop = true;
-            this.radioButton2.Text = "DFS";
-            this.radioButton2.UseVisualStyleBackColor = true;
+            this.DFS.AutoSize = true;
+            this.DFS.Font = new System.Drawing.Font("Lucida Fax", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.DFS.Location = new System.Drawing.Point(169, 17);
+            this.DFS.Name = "DFS";
+            this.DFS.Size = new System.Drawing.Size(48, 19);
+            this.DFS.TabIndex = 12;
+            this.DFS.TabStop = true;
+            this.DFS.Text = "DFS";
+            this.DFS.UseVisualStyleBackColor = true;
+            this.DFS.CheckedChanged += new System.EventHandler(this.DFS_CheckedChanged);
             // 
-            // radioButton1
+            // BFS
             // 
-            this.radioButton1.AutoSize = true;
-            this.radioButton1.Font = new System.Drawing.Font("Lucida Fax", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.radioButton1.Location = new System.Drawing.Point(103, 17);
-            this.radioButton1.Name = "radioButton1";
-            this.radioButton1.Size = new System.Drawing.Size(46, 19);
-            this.radioButton1.TabIndex = 11;
-            this.radioButton1.TabStop = true;
-            this.radioButton1.Text = "BFS";
-            this.radioButton1.UseVisualStyleBackColor = true;
+            this.BFS.AutoSize = true;
+            this.BFS.Font = new System.Drawing.Font("Lucida Fax", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.BFS.Location = new System.Drawing.Point(103, 17);
+            this.BFS.Name = "BFS";
+            this.BFS.Size = new System.Drawing.Size(46, 19);
+            this.BFS.TabIndex = 11;
+            this.BFS.TabStop = true;
+            this.BFS.Text = "BFS";
+            this.BFS.UseVisualStyleBackColor = true;
+            this.BFS.CheckedChanged += new System.EventHandler(this.BFS_CheckedChanged);
             // 
             // panel10
             // 
@@ -327,14 +365,49 @@ namespace NasiPadang
             this.panel10.Name = "panel10";
             this.panel10.Size = new System.Drawing.Size(553, 553);
             this.panel10.TabIndex = 13;
-            this.panel10.Paint += new System.Windows.Forms.PaintEventHandler(this.panel10_Paint);
+            // 
+            // panel11
+            // 
+            this.panel11.BackColor = System.Drawing.Color.Black;
+            this.panel11.Location = new System.Drawing.Point(812, 139);
+            this.panel11.Name = "panel11";
+            this.panel11.Size = new System.Drawing.Size(10, 499);
+            this.panel11.TabIndex = 2;
+            // 
+            // panel12
+            // 
+            this.panel12.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(109)))));
+            this.panel12.Location = new System.Drawing.Point(812, 637);
+            this.panel12.Name = "panel12";
+            this.panel12.Size = new System.Drawing.Size(317, 10);
+            this.panel12.TabIndex = 3;
+            // 
+            // panel13
+            // 
+            this.panel13.BackColor = System.Drawing.Color.Black;
+            this.panel13.Location = new System.Drawing.Point(1120, 138);
+            this.panel13.Name = "panel13";
+            this.panel13.Size = new System.Drawing.Size(10, 500);
+            this.panel13.TabIndex = 3;
+            // 
+            // panel14
+            // 
+            this.panel14.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(109)))));
+            this.panel14.Location = new System.Drawing.Point(559, 637);
+            this.panel14.Name = "panel14";
+            this.panel14.Size = new System.Drawing.Size(246, 10);
+            this.panel14.TabIndex = 3;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Window;
-            this.ClientSize = new System.Drawing.Size(1145, 641);
+            this.ClientSize = new System.Drawing.Size(1145, 659);
+            this.Controls.Add(this.panel14);
+            this.Controls.Add(this.panel12);
+            this.Controls.Add(this.panel13);
+            this.Controls.Add(this.panel11);
             this.Controls.Add(this.panel10);
             this.Controls.Add(this.panel9);
             this.Controls.Add(this.panel8);
@@ -358,6 +431,10 @@ namespace NasiPadang
             this.panel3.PerformLayout();
             this.panel4.ResumeLayout(false);
             this.panel4.PerformLayout();
+            this.panel5.ResumeLayout(false);
+            this.panel5.PerformLayout();
+            this.panel6.ResumeLayout(false);
+            this.panel6.PerformLayout();
             this.panel8.ResumeLayout(false);
             this.panel8.PerformLayout();
             this.panel9.ResumeLayout(false);
@@ -390,10 +467,16 @@ namespace NasiPadang
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Panel panel9;
-        private System.Windows.Forms.RadioButton radioButton2;
-        private System.Windows.Forms.RadioButton radioButton1;
+        private System.Windows.Forms.RadioButton DFS;
+        private System.Windows.Forms.RadioButton BFS;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Panel panel10;
+        private System.Windows.Forms.Panel panel11;
+        private System.Windows.Forms.Panel panel12;
+        private System.Windows.Forms.Panel panel13;
+        private System.Windows.Forms.Panel panel14;
+        private System.Windows.Forms.TextBox textBox_ExploreFriend;
+        private System.Windows.Forms.TextBox textBox_friendRecommend;
     }
 }
 

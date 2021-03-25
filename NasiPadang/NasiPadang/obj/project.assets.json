@@ -121,11 +121,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\ACER\\Documents\\File Kuliah\\Semester 4\\Strategi Algoritma\\Tubes\\BFSDFS\\NasiPadang\\NasiPadang\\NasiPadang.csproj",
+      "projectUniqueName": "C:\\Users\\ACER\\Documents\\File Kuliah\\Semester 4\\Strategi Algoritma\\Tubes\\NasiPadang\\TubesStima\\NasiPadang\\NasiPadang\\NasiPadang.csproj",
       "projectName": "NasiPadang",
-      "projectPath": "C:\\Users\\ACER\\Documents\\File Kuliah\\Semester 4\\Strategi Algoritma\\Tubes\\BFSDFS\\NasiPadang\\NasiPadang\\NasiPadang.csproj",
+      "projectPath": "C:\\Users\\ACER\\Documents\\File Kuliah\\Semester 4\\Strategi Algoritma\\Tubes\\NasiPadang\\TubesStima\\NasiPadang\\NasiPadang\\NasiPadang.csproj",
       "packagesPath": "C:\\Users\\ACER\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\ACER\\Documents\\File Kuliah\\Semester 4\\Strategi Algoritma\\Tubes\\BFSDFS\\NasiPadang\\NasiPadang\\obj\\",
+      "outputPath": "C:\\Users\\ACER\\Documents\\File Kuliah\\Semester 4\\Strategi Algoritma\\Tubes\\NasiPadang\\TubesStima\\NasiPadang\\NasiPadang\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
