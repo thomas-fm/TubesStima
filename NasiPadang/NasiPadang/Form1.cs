@@ -270,24 +270,41 @@ namespace NasiPadang
             visualGraph.FindNode(account).Attr.Shape = Microsoft.Msagl.Drawing.Shape.Diamond;
             visualGraph.FindNode(friends_with).Attr.Shape = Microsoft.Msagl.Drawing.Shape.Diamond;
 
-            List<string> dummy;
-            dummy = new List<string>();
-            dummy.Add("A");
-            dummy.Add("B");
-            dummy.Add("C");
+            List<string> result = new List<string>();
             // lakukan DFS atau bfs
             if (isBFS)
             {
                 // do bfs
                 //
                 //
+                BreadthFirstSearch bfs = new BreadthFirstSearch();
+                List<List<string>> hasilBFS = bfs.ShortestPathToNode(undirectedGraph, account, friends_with);
+
+                for (int k = 0; k < hasilBFS.Count; k++)
+                {
+                    for (int l = 0; l < hasilBFS[k].Count; l++)
+                    {
+                        result.Add(hasilBFS[k][l]);
+                    }
+                }
+
             }
             else if (isDFS)
             {
                 // do dfs
+                DepthFirstSearch dfs = new DepthFirstSearch();
+                List<List<string>> hasilDFS = dfs.ShortestPathToNode(undirectedGraph, account, friends_with);
+
+                for (int k = 0; k < hasilDFS.Count; k++)
+                {
+                    for (int l = 0; l < hasilDFS[k].Count; l++)
+                    {
+                        result.Add(hasilDFS[k][l]);
+                    }
+                }
             }
 
-            if (dummy.Count == 0)
+            if (result.Count == 0)
             {
                 string newLine = Environment.NewLine;
                 MessageBox.Show("Tidak ada jalur koneksi yang tersedia.\nAnda harus memulai koneksi baru itu sendiri.");
@@ -297,27 +314,30 @@ namespace NasiPadang
             }
             else
             {
-                for (int i = 0; i < dummy.Count - 1; i++)
+                for (int i = 0; i < result.Count - 1; i++)
                 {
                     // ini untuk ubah warna jalur
                     foreach (Microsoft.Msagl.Drawing.Edge edge in listOfEdges)
                     {
-                        if ((dummy[i] == edge.Target && dummy[i + 1] == edge.Source)
-                            || (dummy[i] == edge.Source && dummy[i + 1] == edge.Target))
+                        if ((result[i] == edge.Target && result[i + 1] == edge.Source)
+                            || (result[i] == edge.Source && result[i + 1] == edge.Target))
                         {
                             edge.Attr.Color = Microsoft.Msagl.Drawing.Color.Green;
                         }
                     }
                     // perlu ubah warna node juga kah?
-                    if (dummy[i] != account && dummy[i] != friends_with)
+                    if (result[i] != account && result[i] != friends_with)
                     {
-                        visualGraph.FindNode(dummy[i]).Attr.Shape = Microsoft.Msagl.Drawing.Shape.Circle;
-                        visualGraph.FindNode(dummy[i]).Attr.Color = Microsoft.Msagl.Drawing.Color.LightBlue;
+                        var node = visualGraph.FindNode(result[i]);
+                        node.Attr.Shape = Microsoft.Msagl.Drawing.Shape.Circle;
+                        node.Attr.FillColor = Microsoft.Msagl.Drawing.Color.LightBlue;
+                        //visualGraph.FindNode(result[i]).Attr.Shape = Microsoft.Msagl.Drawing.Shape.Circle;
+                        //visualGraph.FindNode(result[i]).Attr.Color = Microsoft.Msagl.Drawing.Color.LightBlue;
                     }
                 }
 
                 // Menuliskan ke text box
-                int nDegree = dummy.Count - 2;
+                int nDegree = result.Count - 2;
                 string content = string.Empty;
                 if (nDegree == 1)
                 {
@@ -341,13 +361,13 @@ namespace NasiPadang
                 string newLine = Environment.NewLine;
                 content += newLine;
 
-                for (int i =0; i < dummy.Count; i++)
+                for (int i =0; i < result.Count; i++)
                 {
                     if (i != 0)
                     {
                         content += " => ";
                     }
-                    content += dummy[i];
+                    content += result[i];
                 }
                 textBox_ExploreFriend.Text = string.Empty;
                 textBox_ExploreFriend.Text = content;

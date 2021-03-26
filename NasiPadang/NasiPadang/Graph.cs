@@ -4,6 +4,7 @@ using System.Collections.Generic;
 public class Graph
 {
     private List<List<string>> adj;// berisi sisi dari graf
+    public List<List<string>> adj2 { get; set; }
     private List<string> nodes; // berisi simpul graf
     private int nNodes;
     private List<(string, string)> listOfEdge;
@@ -35,6 +36,7 @@ public class Graph
             {
                 string[] node = line.Split();
                 addAdj(node[0], node[1]); // tambah sisi
+               
             }
             i++;
         }
@@ -51,6 +53,14 @@ public class Graph
                 listOfEdge.Add(t1);
             }
             i++;
+        }
+        // assign ke addj2
+        adj2 = new List<List<string>>();
+        adj2 = adj;
+
+        for (int j = 0; j < nodes.Count; j++)
+        {
+            adj2[j].Insert(0, nodes[j]);
         }
     }
 
