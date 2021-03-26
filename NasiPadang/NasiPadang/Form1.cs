@@ -24,7 +24,7 @@ namespace NasiPadang
         string account; // comob box 1
         string friends_with; // combo box 2
 
-        public Microsoft.Msagl.Drawing.Graph visualGraph;
+        public Microsoft.Msagl.Drawing.Graph visualGraph; // visualizer
         public Form1()
         {
             InitializeComponent();
@@ -40,54 +40,61 @@ namespace NasiPadang
         {
             // Proses upload file
             OpenFileDialog ofd = new OpenFileDialog();
-            if (ofd.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            try
             {
-                // Graph
-                undirectedGraph = new Graph();
-                // Path File
-                var filePath = string.Empty;
-                // Isi file
-                var content = string.Empty;
-                var fileStream = ofd.OpenFile();
-                filePath = ofd.FileName;
-
-                using (StreamReader reader = new StreamReader(fileStream))
+                if (ofd.ShowDialog() == System.Windows.Forms.DialogResult.OK)
                 {
-                    content = reader.ReadToEnd();
+                    // Graph
+                    undirectedGraph = new Graph();
+                    // Path File
+                    var filePath = string.Empty;
+                    // Isi file
+                    var content = string.Empty;
+                    var fileStream = ofd.OpenFile();
+                    filePath = ofd.FileName;
+
+                    using (StreamReader reader = new StreamReader(fileStream))
+                    {
+                        content = reader.ReadToEnd();
+                    }
+                    // Tampilkan nama file di sebelah button
+                    textBox1.AppendText(filePath);
+                    string[] lines = content.Split("\n");
+                    // Ubah teks menjadi graf
+                    undirectedGraph.readFromFile(lines);
+
+                    // assign content ke Graph
+                    visualGraph = new Microsoft.Msagl.Drawing.Graph("visualGraph");
+                    visualGraph.Directed = false;
+
+                    int i = 0;
+                    // Get list of edge
+                    List<(string, string)> edges = undirectedGraph.getListOfEdge();
+
+                    // tampilkan dalam gviewer1
+                    foreach ((string, string) tuples in edges)
+                    {
+                        var edge = visualGraph.AddEdge(tuples.Item1, tuples.Item2);
+                        edge.Attr.ArrowheadAtSource = Microsoft.Msagl.Drawing.ArrowStyle.None;
+                        edge.Attr.ArrowheadAtTarget = Microsoft.Msagl.Drawing.ArrowStyle.None;
+                    }
+
+                    // Isi combo box 1
+                    comboBox1.BeginUpdate();
+                    comboBox1.Items.Clear();
+
+                    gViewer1.Graph = visualGraph;
+
+                    foreach (string node in undirectedGraph.getNode())
+                    {
+                        comboBox1.Items.Add(node);
+                    }
+                    comboBox1.EndUpdate();
                 }
-                // Tampilkan nama file di sebelah button
-                textBox1.AppendText(filePath);
-                string[] lines = content.Split("\n");
-                // Ubah teks menjadi graf
-                undirectedGraph.readFromFile(lines);
-
-                // assign content ke Graph
-                visualGraph = new Microsoft.Msagl.Drawing.Graph("visualGraph");
-                visualGraph.Directed = false;
-
-                int i = 0;
-                // Get list of edge
-                List<(string, string)> edges = undirectedGraph.getListOfEdge();
-
-                // tampilkan dalam gviewer1
-                foreach ((string, string) tuples in edges)
-                {
-                    var edge = visualGraph.AddEdge(tuples.Item1, tuples.Item2);
-                    edge.Attr.ArrowheadAtSource = Microsoft.Msagl.Drawing.ArrowStyle.None;
-                    edge.Attr.ArrowheadAtTarget = Microsoft.Msagl.Drawing.ArrowStyle.None;
-                }
-
-                // Isi combo box 1
-                comboBox1.BeginUpdate();
-                comboBox1.Items.Clear();
-
-                gViewer1.Graph = visualGraph;
-                
-                foreach (string node in undirectedGraph.getNode())
-                {
-                    comboBox1.Items.Add(node);
-                }
-                comboBox1.EndUpdate();
+            }
+            catch(Exception)
+            {
+                MessageBox.Show("Error");
             }
         }
 
@@ -143,7 +150,7 @@ namespace NasiPadang
         {
             try
             {
-                string newLine = Environment.NewLine; // untuk newline, karena tidak bisa \n
+                string newLine = Environment.NewLine; // untuk newline, karena tidak bisa
                 List<List<string>> associatedMutual = undirectedGraph.sortedMutual(account); // dapatkan mutual friends
                 string content = string.Empty;
                 // tampilkan ke text box
@@ -151,23 +158,41 @@ namespace NasiPadang
                 textBox_friendRecommend.Text = string.Empty;
                 // tampilkan
                 //printGraph(); for testing
-                for (int i = 0; i < associatedMutual.Count; i++)
+
+                // versi 2
+                string content2 = string.Empty;
+                
+                while (associatedMutual.Count > 0)
                 {
-                    content = content + "=> Akun : " + associatedMutual[i][0] + newLine;
-                    content += "Mutual Friends : ";
-                    for (int j = 1; j < associatedMutual[i].Count; j++)
+                    int idx = 0;
+                    
+                    for (int i = 0; i < associatedMutual.Count; i++)
+                    {
+                        if (associatedMutual[i].Count > associatedMutual[idx].Count)
+                        {
+                            idx = i;
+                        }
+                    }
+
+                    content2 = content2 + "=> Akun : " + associatedMutual[idx][0] + newLine;
+                    content2 += "Mutual Friends : ";
+                    for (int j = 1; j < associatedMutual[idx].Count; j++)
                     {
                         if (j != 1)
                         {
-                            content += ", ";
+                            content2 += ", ";
                         }
-                        content += associatedMutual[i][j];
+                        content2 += associatedMutual[idx][j];
                     }
-                    content += newLine;
+                    content2 += newLine;
+
+                    // delete
+                    associatedMutual.RemoveAt(idx);
+
                 }
-                
+
                 //MessageBox.Show(content); for testing
-                textBox_friendRecommend.Text = content;
+                textBox_friendRecommend.Text = content2;
             }
             catch(Exception)
             {
@@ -275,8 +300,6 @@ namespace NasiPadang
             if (isBFS)
             {
                 // do bfs
-                //
-                //
                 BreadthFirstSearch bfs = new BreadthFirstSearch();
                 List<List<string>> hasilBFS = bfs.ShortestPathToNode(undirectedGraph, account, friends_with);
 
@@ -307,7 +330,7 @@ namespace NasiPadang
             if (result.Count == 0)
             {
                 string newLine = Environment.NewLine;
-                MessageBox.Show("Tidak ada jalur koneksi yang tersedia.\nAnda harus memulai koneksi baru itu sendiri.");
+                //MessageBox.Show("Tidak ada jalur koneksi yang tersedia.\nAnda harus memulai koneksi baru itu sendiri.");
                 string content = "Tidak ada jalur koneksi yang tersedia" + newLine + "Anda harus memulai koneksi baru itu sendiri.";
                 textBox_ExploreFriend.Text = string.Empty;
                 textBox_ExploreFriend.Text = content;
@@ -387,13 +410,13 @@ namespace NasiPadang
         private void BFS_CheckedChanged(object sender, EventArgs e)
         {
             isBFS = BFS.Checked;
-            MessageBox.Show("Do BFS things");
+            //MessageBox.Show("Do BFS things");
         }
 
         private void DFS_CheckedChanged(object sender, EventArgs e)
         {
             isDFS = DFS.Checked;
-            MessageBox.Show("Do DFS things");
+            //MessageBox.Show("Do DFS things");
         }
         
     }

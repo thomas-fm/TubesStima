@@ -86,16 +86,7 @@ namespace NasiPadang
                     AntrianNodeLevel.Add(new List<string>(TempAntrian));
                     TempAntrian.Clear();
                 }
-                //if (i < graphInput.nPairs) {
-                //    i++;
-                //}
             }
-
-            // while (BFSOrder.Count > 0)
-            // {
-            //     string e = BFSOrder.Dequeue();
-            //     Console.WriteLine(e);
-            // }
 
             return AntrianNodeLevel;
         }
@@ -103,7 +94,6 @@ namespace NasiPadang
         public List<List<string>> ShortestPathToNode(Graph graphInput, string startingNode, string endNode) // ini kalau Graph udah bener
         {
             bool ketemu = false;
-            // Queue<string> BFSOrder = new Queue<string>();
 
             Queue<string> AntrianNode = new Queue<string>();
             HashSet<string> Dikunjungi = new HashSet<string>();
@@ -126,15 +116,11 @@ namespace NasiPadang
             int i = 0;
             if (startingNode == endNode) {
                 return AntrianNodeLevel;
-                // List<string> temp = new List<string>(e);
-                // List<List<string>> sama = new List<List<string>>(temp);
-                // return sama;
             }
             while (AntrianNode.Count > 0)
             {
                 string e = AntrianNode.Dequeue();
                 indexCurrentNode = SearchNodeIndex(graphInput, e);
-                // BFSOrder.Enqueue(e);
 
                 foreach(string nodeTetangga in graphInput.adj2[indexCurrentNode])
                 {
@@ -157,9 +143,6 @@ namespace NasiPadang
                     AntrianNodeLevel.Add(new List<string>(TempAntrian));
                     TempAntrian.Clear();
                 }
-                //if (i < graphInput.nPairs) {
-                //    i++;
-                //}
 
                 if (nodeTerakhirLevel == endNode) {
                     ketemu = true;
@@ -205,12 +188,6 @@ namespace NasiPadang
                 AntrianNodeLevel.Add(new List<string>(TempAntrian));
                 TempAntrian.Clear();
             }
-
-            // while (BFSOrder.Count > 0)
-            // {
-            //     string e = BFSOrder.Dequeue();
-            //     Console.WriteLine(e);
-            // }
 
             return AntrianNodeLevel;
         }

@@ -103,7 +103,7 @@ namespace NasiPadang
 
         public List<List<string>> ShortestPathToNode(Graph graphInput, string startingNode, string endNode) // ini kalau Graph udah bener
         {
-            bool ketemu;
+            bool ketemu = false;
             Stack<string> nodeBlmKelar = new Stack<string>();
             Stack<string> AntrianNode = new Stack<string>();
             List<string> urutanDFS = new List<string>();
