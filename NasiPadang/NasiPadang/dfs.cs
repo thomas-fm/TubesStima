@@ -5,9 +5,10 @@ using System.Text;
 
 namespace NasiPadang
 {
-
+    //Class yang menyimpan method-method untuk melakukan algoritma Depth First Search (DFS)
     public class DepthFirstSearch
     {
+        //Method yang akan mengembalikan node apabila suatu node ditemukan pada graph
         public string Search(Graph graphInput, string nameToSearchFor)
         {
             Queue<string> AntrianNode = new Queue<string>();
@@ -32,6 +33,7 @@ namespace NasiPadang
             return "Tidak ditemukan";
         }
 
+        //Method yang mengembalikan letak index node pada graph
         public int SearchNodeIndex(Graph graphInput, string nodeToSearch) {
             int i = 0;
             while (graphInput.adj2[i][0] != nodeToSearch) {
@@ -40,8 +42,10 @@ namespace NasiPadang
             return i;
         }
 
+        //Method utama untuk menelusuri graph dengan algoritma DFS
         public List<List<string>> DFS(Graph graphInput, string startingNode) 
         {
+            //Inisialisasi variabel
             Stack<string> nodeBlmKelar = new Stack<string>();
             Stack<string> AntrianNode = new Stack<string>();
             List<string> urutanDFS = new List<string>();
@@ -62,12 +66,16 @@ namespace NasiPadang
             nodeByLevel.Add(new List<string>(urutanDFS));
             urutanDFS.Clear();
 
+            //DFS akan dijalankan hingga AntrianNode.Count() == 0 dengan kata lain, ketika semua node sudah dikunjungi dan ditelusuri
             while(AntrianNode.Count() > 0) {
                 adaYangBelum = false;
+                //Menyimpan node yang saat ini ditelusuri ke dalam variabel
                 string e = AntrianNode.Pop();
                 indexCurrentNode = SearchNodeIndex(graphInput, e);
 
+                //Melakukan traversal untuk menemukan node cabang yang belum ditelusuri
                 foreach(string nodeTetangga in graphInput.adj2[indexCurrentNode]) {
+                    //Apabila node cabang belum ditelusuri, masukan ke dalam stack dan lanjutkan menelusuri node tersebut
                     if(!Dikunjungi.Contains(nodeTetangga)) {
                         //Debug
                         level++;
@@ -88,6 +96,7 @@ namespace NasiPadang
                     }
                 }
 
+                //Apabila belum semua node ditelusuri, mengganti node yang saat ini akan ditelusuri
                 if(!adaYangBelum) {
                     level--;
                     nodeBlmKelar.Pop();
@@ -101,8 +110,10 @@ namespace NasiPadang
             return nodeByLevel;
         }
 
+        //Algoritma untuk menemukan rute dari suatu node ke node lainnya dengan DFS
         public List<List<string>> ShortestPathToNode(Graph graphInput, string startingNode, string endNode) // ini kalau Graph udah bener
         {
+            //Inisialisasi variabel
             bool ketemu = false;
             Stack<string> nodeBlmKelar = new Stack<string>();
             Stack<string> AntrianNode = new Stack<string>();
@@ -125,6 +136,7 @@ namespace NasiPadang
             nodeByLevel.Add(new List<string>(urutanDFS));
             urutanDFS.Clear();
 
+            //Algoritma DFS dijalankan
             while(AntrianNode.Count() > 0) {
                 adaYangBelum = false;
                 string e = AntrianNode.Pop();
@@ -158,17 +170,20 @@ namespace NasiPadang
                         AntrianNode.Push(nodeBlmKelar.Peek());
                     }
                 }
+                //Apabila node tujuan sudah ditemukan dalam pencarian, keluar dari loop
                 if (nodeTerakhirLevel == endNode) {
                     ketemu = true;
                     break;
                 }
                 urutanDFS.Clear();
             }
+            //Apabila tidak ditemukan rute untuk menuju node tujuan, kembalikan list kosong
             if(!ketemu) {
                 List<List<string>> gakKetemu = new List<List<string>>();
                 return gakKetemu;
             }
 
+            //Algoritma untuk "backtrack" dan menyusun jalur dari node asal ke node tujuan sesuai hasil DFS yang telah didapatkan
             Stack<string> Pathnya = new Stack<string>();
             bool found;
             nodeTerakhirLevel = endNode;
@@ -193,6 +208,9 @@ namespace NasiPadang
                 }
                 i--;
             }
+
+
+            //Menyalin hasil jalur untuk disimpan sesuai tipe return method
             Pathnya.Push(startingNode);
             nodeByLevel.Clear();
             urutanDFS.Clear();
@@ -210,6 +228,7 @@ namespace NasiPadang
             return nodeByLevel;   
         }
 
+        //Method antara yang digunakan untuk mengecek apakah terdapat bug pada hasil penelusuran DFS
         public bool cekAdaBug(List<List<string>> container, List<string> bug) {
             int i = 0;
             while (i < container.Count()) {
@@ -221,6 +240,7 @@ namespace NasiPadang
             return false;
         }
 
+        //Method untuk mengeluarkan hasil penelusuran DFS ke layar; digunakan untuk testing
         public void PrintAllPath(List<List<string>> AllPath)
         {
 
@@ -244,6 +264,7 @@ namespace NasiPadang
             } 
         }
 
+        //Method untuk mengeluarkan hasil penelusuran DFS ke layar; digunakan untuk testing
         public void PrintShortestPath(List<List<string>> ShortestPath) {
             int i = ShortestPath.Count()-1;
             Console.Write("Jarak terpendek dari node {0} ke node {1} adalah: ", ShortestPath[0][0], ShortestPath[i][0]);
