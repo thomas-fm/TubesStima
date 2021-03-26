@@ -102,7 +102,7 @@ namespace NasiPadang
 
         public List<List<string>> ShortestPathToNode(Graph graphInput, string startingNode, string endNode) // ini kalau Graph udah bener
         {
-                
+            bool ketemu = false;
             // Queue<string> BFSOrder = new Queue<string>();
 
             Queue<string> AntrianNode = new Queue<string>();
@@ -162,8 +162,13 @@ namespace NasiPadang
                 //}
 
                 if (nodeTerakhirLevel == endNode) {
+                    ketemu = true;
                     break;
                 }
+            }
+            if(!ketemu) {
+                List<List<string>> gakKetemu = new List<List<string>>();
+                return gakKetemu;
             }
 
             Stack<string> Pathnya = new Stack<string>();

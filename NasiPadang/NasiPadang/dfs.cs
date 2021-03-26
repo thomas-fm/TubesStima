@@ -103,6 +103,7 @@ namespace NasiPadang
 
         public List<List<string>> ShortestPathToNode(Graph graphInput, string startingNode, string endNode) // ini kalau Graph udah bener
         {
+            bool ketemu;
             Stack<string> nodeBlmKelar = new Stack<string>();
             Stack<string> AntrianNode = new Stack<string>();
             List<string> urutanDFS = new List<string>();
@@ -158,9 +159,14 @@ namespace NasiPadang
                     }
                 }
                 if (nodeTerakhirLevel == endNode) {
+                    ketemu = true;
                     break;
                 }
                 urutanDFS.Clear();
+            }
+            if(!ketemu) {
+                List<List<string>> gakKetemu = new List<List<string>>();
+                return gakKetemu;
             }
 
             Stack<string> Pathnya = new Stack<string>();
